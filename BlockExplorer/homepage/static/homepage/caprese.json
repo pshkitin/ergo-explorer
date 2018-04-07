@@ -1,0 +1,34 @@
+{
+    "recipe": {
+        "author":"vladimir",
+        "email": "popovva@pochtabank.ru",
+        "name": "Caprese salad",
+        "ingredients": [
+            {
+                "name": "tomato",
+                "units": "unit",
+                "amount": 2
+            },
+            {
+                "name": "mozzarella",
+                "units": "g.",
+                "amount": 150
+            },
+            {
+                "name": "olive oil",
+                "units": "ml.",
+                "amount": 20
+            },
+            {
+                "name": "pesto",
+                "units": "g",
+                "amount": 10
+            },
+            {
+                "name": "basil",
+                "units": "leaf",
+                "amount": 5
+            }
+        ]
+    }
+}
