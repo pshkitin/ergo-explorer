@@ -1,12 +1,26 @@
-{% extends "homepage/base.html" %} {% load staticfiles %} {% block content %}
+{% extends "homepage/base.html" %} {% load staticfiles %} {% block content %} 
+<div class="container">
 <div class="jumbotron text-center">
-  <div class="container">
-   hello world
+    <h2> Ergo-explorer</h2>
+  </div>
+  
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>timestamp</th>
+        <th>height</th>
+        <th>Id</th>
+        <th>difficulty</th>
+      </tr>
+      {% for blockId in blocklist%}
+      <tr>
+        <td>{{blockId.timestamp}}</td>
+        <td>{{blockId.height}}</td>
+        <td>{{blockId.id}}</td>
+        <td>{{blockId.difficulty}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-<div> <p>this is list of last blocks</p>
-  {% for blockId in  blocklist%}
-
-  {{blockId}}
-  {% endfor %}
-</div>
-{% endblock %}
+  {% endblock %}
