@@ -1,8 +1,7 @@
 {% extends "homepage/base.html" %} {% load staticfiles %} {% block content %} 
 <div class="container">
 <div class="jumbotron text-center">
-    <h2> Ergo-explorer</h2>
-    <h3> Last blocks</h3>
+    <h2> Transactions in block {{blockId}}</h2>
     <a class = "navbar-right" href = "{% url 'graph' %}"><h3>Network graph</h3></a>
     <a class = "navbar-brand" href = "https://ergoplatform.org/"><h3>About</h3></a>
   </div>
@@ -10,17 +9,11 @@
   <table class="table table-striped">
     <tbody>
       <tr>
-        <th>timestamp</th>
-        <th>height</th>
-        <th>Id</th>
-        <th>difficulty</th>
+        <th>Tx Id</th>
       </tr>
-      {% for blockId in blocklist%}
+      {% for tx in txlist%}
       <tr>
-        <td>{{blockId.timestamp}}</td>
-        <td>{{blockId.height}}</td>
-        <td><a href="{% url 'blockinfo' %}?id={{blockId.id}}">{{blockId.id}}</a></td>
-        <td>{{blockId.difficulty}}</td>
+        <td>{{tx.id}}</td>
       </tr>
       {% endfor %}
     </tbody>
