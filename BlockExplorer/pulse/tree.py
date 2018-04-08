@@ -31,11 +31,12 @@ def getNodes(_root):
 def getNodeState(_root):
     nodeList = getNodes(_root)
     # print(nodeList["links"])
-    result = {"nodes":[],"links":nodeList["links"]}
+    result = {"nodes":[], "links":nodeList["links"]}
     for node in nodeList["nodes"]:
-        nodeInfo = requests.get("http://" + node["id"] + ":9051/info").json()
-        # print(nodeInfo["fullHeight"])
-        result["nodes"].append({"id":node["id"], "group":nodeInfo["fullHeight"]})
+        group = "0"
+        if node["id"][:1] != "_":
+            group = requests.get("http://" + node["id"] + ":9051/info").json()["fullHeight"]
+        result["nodes"].append({"id":node["id"], "group":group})
     return result
 class Node(object):
     def __init__(self, id_):
@@ -52,12 +53,18 @@ class Node(object):
         self.children.append(node)
 
     def get_children(self, exclude):
-        peerList = requests.get("http://" + self.id + ":9051/peers/all").json()
         children = []
-        for peer in peerList:
-            newChild = Node(peer["address"].split("/")[1].split(":")[0])
-            if newChild not in exclude:
-                children.append(newChild)
+        if self.id[:1] != "_":
+            peerList = requests.get("http://" + self.id + ":9051/peers/all").json()
+            for peer in peerList:
+                newChild = Node(peer["address"].split("/")[1].split(":")[0])
+                if newChild not in exclude:
+                    children.append(newChild)
+            connectedList = requests.get("http://" + self.id + ":9051/peers/connected").json()
+            for connectedPeer in connectedList:
+                connectedChild = Node("_" + connectedPeer["name"])
+                if connectedChild not in exclude:
+                    children.append(connectedChild)
         return children
 
 ########################################################################

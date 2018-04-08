@@ -19,6 +19,8 @@ import homepage.views,pulse.views
 
 urlpatterns = [
     url(r'^pulse', pulse.views.pulse),
+    url(r'^block', homepage.views.blockinfo,name = "blockinfo"),
+    url(r'^graph', homepage.views.graph,name = "graph"),
     url(r'^$', homepage.views.homepage),
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls)
 ]
